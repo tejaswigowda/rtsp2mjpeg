@@ -211,7 +211,7 @@
     var stream = canvas.captureStream(30);
 
     document.getElementsByClassName("local-view")[0].srcObject = stream;
-
+    document.getElementsByClassName("local-view")[0].style.display = "none";
         $("#sendVideo").prop("checked",true);
         $("#sendAudio").prop("checked",false);
         
