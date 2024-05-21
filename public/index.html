@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+    <div style="height: 30rem; width:30rem ;">
+        <canvas id="canvas" onclick="stop()"></canvas>
+    </div>
+
+  </body>
+  <script src="jsmpeg.min.js"></script>
+    <script>
+	player = new JSMpeg.Player('ws://localhost:9999', {
+	  canvas: document.getElementById('canvas') 
+	})	
+    </script>
+
+</html>
