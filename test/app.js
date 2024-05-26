@@ -68,7 +68,7 @@ connectws();
 function write(data) {
     // send binary data
     if (ws.readyState == 1){// && numberofclients > 0) {
-        //console.log("sending data");
+        console.log("sending data");
         ws.send(data);
     }
 }
