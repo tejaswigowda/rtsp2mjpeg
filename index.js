@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+
+var forever = require('forever-monitor');
+
 if (process.argv.length < 4) {
     console.log("Usage: rtsp2WebSocket <rtsp-stream-url> <ws-url> <dest-port>(optional; default=3000) <internalPort>(optional; default=9999) <fps>(optional/ default = 30) <size>(optional;default=1920x1080)");
     process.exit();
@@ -13,7 +16,6 @@ var size = process.argv[7] || "1920x1080"
 
 //console.log(streamUrl, wsurl, internalPort, fps, size);
 
-var forever = require('forever-monitor');
 
 var child = new (forever.Monitor)('app.js', {
     max: 30000,
