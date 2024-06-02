@@ -1,83 +1,19 @@
 #!/usr/bin/env node
-
 if (process.argv.length < 4) {
-    console.log("Usage: node app.js <ipAddr> <port>");
+    console.log("Usage: node rtsp2WebSocket.js <rtsp-stream-url> <ws-url> <internalPort>(optional; default=9999) <fps>(optional/ default = 30) <size>(optional;default=1920x1080)");
     process.exit();
 }
-var ipAddr = process.argv[2];
-var port = process.argv[3];
-
-var stream = require('node-rtsp-stream')
-const express = require('express')
-const app = express()
-
-var stream = new stream({
-    name: 'name',
-    streamUrl: 'rtsp://Garden:mixmesa1@192.168.1.110/stream1',
-    wsPort: 9999,
-    ffmpegOptions: { // options ffmpeg flags
-        '-stats': '', // an option with no neccessary value uses a blank string
-        '-r': 30, // options with required values specify the value after the key
-        '-s': '1920x1080'
-    }
-})
+var streamUrl = process.argv[2];
+var wsurl  = process.argv[3];
+var internalPort = parseInt(process.argv[4] || "9999");
+var fps = parseInt(process.argv[5] || "30")
+var size = process.argv[6] || "1920x1080"
 
 
-// serve /public folder
-app.use(express.static(__dirname + '/public'));
+var forever = require('forever-monitor');
 
-app.listen(3000, () => {
-    console.log('Listening on port 3000')
+var child = new (forever.Monitor)('app.js', {
+    max: 3,
+    silent: true,
+    args: [streamUrl, wsurl, internalPort, fps, size]
 });
-
-
-var WebSocket = require('ws');
-var wsMaster = new WebSocket('ws://localhost:9999');
-wsMaster.on('open', function open() {
-    console.log('connected');
-});
-wsMaster.on('close', function close() {
-    console.log('disconnected');
-});
-wsMaster.on('message', function incoming(data) {
-    // console.log(data);
-    write(data);
-});
-
-
-
-
-var ws = null;
-
-function connectws() {
-    ws = new WebSocket('ws://' + ipAddr + ':' + port + '/jpgstream_server');
-    ws.on('open', function open() {
-        console.log("connected");
-        //write("hello");
-    });
-
-    ws.on('message', function incoming(data) {
-        console.log(data);
-    });
-
-    ws.on('close', function close() {
-        console.log('disconnected');
-        connectws();
-    });
-}
-
-connectws();
-
-function write(data) {
-    // send binary data
-    if (ws.readyState == 1){// && numberofclients > 0) {
-        console.log("sending data");
-        ws.send(data);
-    }
-}
-
-
-
-
-
-
