@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 if (process.argv.length < 4) {
     console.log("Usage: node app.js <ipAddr> <port>");
     process.exit();
@@ -41,6 +43,7 @@ wsMaster.on('message', function incoming(data) {
     // console.log(data);
     write(data);
 });
+
 
 
 
