@@ -1,11 +1,10 @@
 {
   "name": "rtsp2mjpeg",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "turn an rtsp stream into a localhost http stream",
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
-    "test": "rtsp2mjpeg <input-rtsp-stream-url> <output-http-port> <internalPort>(optional; default=9999) <fps>(optional/ default = 30) <size>(optional;default=1920x1080)",
     "start": "node index.js"
   },
   "repository": {
