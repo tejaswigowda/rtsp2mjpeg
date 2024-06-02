@@ -78,6 +78,21 @@ function write(data) {
 }
 
 
+// check if stream is still running
+setTimeout(function() {
+    isAlive();
+}, 1000*5);
+
+function isAlive(){
+    if(stream.mpeg1Muxer.stream.exitCode == null){
+        console.log("stream is running");
+        setTimeout(isAlive, 1000*5);
+    } else {
+        console.log("stream is not running");
+        process.exit();
+    }
+}
+
 
 
 
