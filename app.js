@@ -1,38 +1,42 @@
 #!/usr/bin/env node
 
-if (process.argv.length < 4) {
-    console.log("Usage: node app.js <ipAddr> <port>");
-    process.exit();
-}
-var ipAddr = process.argv[2];
-var port = process.argv[3];
+
+var streamUrl = process.argv[2];
+var wsurl  = process.argv[3];
+var destPort = parseInt(process.argv[4] || "3000");
+var internalPort = parseInt(process.argv[5] || "9999");
+var fps = parseInt(process.argv[6] || "30")
+var size = process.argv[7] || "1920x1080"
+
+console.log(streamUrl, wsurl, internalPort, fps, size);
+
 
 var stream = require('node-rtsp-stream')
 const express = require('express')
-const app = express()
+const app = express();
+
 
 var stream = new stream({
     name: 'name',
-    streamUrl: 'rtsp://Garden:mixmesa1@192.168.1.110/stream1',
-    wsPort: 9999,
+    streamUrl: streamUrl,
+    wsPort: internalPort,
     ffmpegOptions: { // options ffmpeg flags
-        '-stats': '', // an option with no neccessary value uses a blank string
-        '-r': 30, // options with required values specify the value after the key
-        '-s': '1920x1080'
+        '-stats': '',
+        '-r': fps,
+        '-s': size
     }
 })
-
 
 // serve /public folder
 app.use(express.static(__dirname + '/public'));
 
-app.listen(3000, () => {
-    console.log('Listening on port 3000')
+app.listen(destPort, () => {
+    console.log('Listening on port ' + destPort)
 });
 
 
 var WebSocket = require('ws');
-var wsMaster = new WebSocket('ws://localhost:9999');
+var wsMaster = new WebSocket("ws://localhost:" + internalPort);
 wsMaster.on('open', function open() {
     console.log('connected');
 });
@@ -50,10 +54,9 @@ wsMaster.on('message', function incoming(data) {
 var ws = null;
 
 function connectws() {
-    ws = new WebSocket('ws://' + ipAddr + ':' + port + '/jpgstream_server');
+    ws = new WebSocket(wsurl);
     ws.on('open', function open() {
         console.log("connected");
-        //write("hello");
     });
 
     ws.on('message', function incoming(data) {
@@ -71,7 +74,6 @@ connectws();
 function write(data) {
     // send binary data
     if (ws.readyState == 1){// && numberofclients > 0) {
-        console.log("sending data");
         ws.send(data);
     }
 }
