@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-
 var streamUrl = process.argv[2];
 var wsurl  = process.argv[3];
 var destPort = parseInt(process.argv[4] || "3000");
