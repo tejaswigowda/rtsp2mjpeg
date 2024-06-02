@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var forever = require('forever-monitor');
+var forever = require('./node_modules/forever-monitor');
 
 if (process.argv.length < 4) {
     console.log("Usage: rtsp2WebSocket <rtsp-stream-url> <ws-url> <dest-port>(optional; default=3000) <internalPort>(optional; default=9999) <fps>(optional/ default = 30) <size>(optional;default=1920x1080)");
