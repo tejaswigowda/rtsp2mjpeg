@@ -2,13 +2,13 @@
 
 var forever = require('forever-monitor');
 
-if (process.argv.length < 4) {
-    console.log("Usage: rtsp2WebSocket <rtsp-stream-url> <ws-url> <dest-port>(optional; default=3000) <internalPort>(optional; default=9999) <fps>(optional/ default = 30) <size>(optional;default=1920x1080)");
+if (process.argv.length < 3) {
+    console.log("Usage: rtsp2WebSocket <rtsp-stream-url> <ws-url>(optional; default=null) <dest-port>(optional; default=3000) <internalPort>(optional; default=9999) <fps>(optional/ default = 30) <size>(optional;default=1920x1080)");
     process.exit();
 }
 
 var streamUrl = process.argv[2];
-var wsurl  = process.argv[3];
+var wsurl  = process.argv[3] || null;
 var internalPort = parseInt(process.argv[4] || "9999");
 var destPort = parseInt(process.argv[5] || "3000");
 var fps = parseInt(process.argv[6] || "30")
