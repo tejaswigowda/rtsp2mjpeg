@@ -20,5 +20,4 @@ var child = new (forever.Monitor)('app.js', {
     args: [streamUrl, wsurl, internalPort, destPort, fps, size]
 });
 
-
 child.start();

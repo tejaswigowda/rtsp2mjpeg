@@ -37,6 +37,9 @@ app.get('/getWSPort', (req, res) => {
 app.listen(destPort, () => {
     // red color in console
     console.log('\x1b[31m%s\x1b[0m', 'Listening on port ' + destPort);
+    // open in browser
+    var opn = require('opn');
+    opn('http://localhost:' + destPort);
 });
 
 var WebSocket = require('ws');
