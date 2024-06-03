@@ -14,9 +14,6 @@ var destPort = parseInt(process.argv[5] || "3000");
 var fps = parseInt(process.argv[6] || "30")
 var size = process.argv[7] || "1920x1080"
 
-//console.log(streamUrl, wsurl, internalPort, fps, size);
-
-
 var child = new (forever.Monitor)('app.js', {
     max: 30000,
     silent: false,

@@ -4,16 +4,12 @@ var streamUrl = process.argv[2];
 var wsurl  = process.argv[3];
 var internalPort = parseInt(process.argv[4] || "9999");
 var destPort = parseInt(process.argv[5] || "3000");
-var fps = parseInt(process.argv[6] || "30")
-var size = process.argv[7] || "1920x1080"
-
-console.log(streamUrl, wsurl, internalPort, destPort, fps, size);
-
+var fps = parseInt(process.argv[6] || "30");
+var size = process.argv[7] || "1920x1080";
 
 var stream = require('node-rtsp-stream')
 const express = require('express')
 const app = express();
-
 
 var stream = new stream({
     name: 'name',
@@ -33,10 +29,13 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/getWSPort', (req, res) => {
+    res.send(internalPort.toString());
+});
+
 app.listen(destPort, () => {
     console.log('Listening on port ' + destPort)
 });
-
 
 var WebSocket = require('ws');
 var wsMain = new WebSocket("ws://localhost:" + internalPort);
@@ -50,9 +49,6 @@ wsMain.on('message', function incoming(data) {
     // console.log(data);
     write(data);
 });
-
-
-
 
 var ws = null;
 
@@ -89,10 +85,8 @@ setTimeout(function() {
 
 function isAlive(){
     if(stream.mpeg1Muxer.stream.exitCode == null){
-        //console.log("stream is running");
         setTimeout(isAlive, 1000*5);
     } else {
-        //console.log("stream is not running");
         process.exit();
     }
 }
