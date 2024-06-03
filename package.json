@@ -1,6 +1,6 @@
 {
   "name": "rtsp2mjpeg",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "turn an rtsp stream into a localhost jsmpeg stream",
   "main": "index.js",
   "bin": "index.js",

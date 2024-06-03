@@ -9,8 +9,8 @@ if (process.argv.length < 4) {
 
 var streamUrl = process.argv[2];
 var wsurl  = process.argv[3];
-var destPort = parseInt(process.argv[4] || "3000");
-var internalPort = parseInt(process.argv[5] || "9999");
+var internalPort = parseInt(process.argv[4] || "9999");
+var destPort = parseInt(process.argv[5] || "3000");
 var fps = parseInt(process.argv[6] || "30")
 var size = process.argv[7] || "1920x1080"
 
@@ -20,7 +20,7 @@ var size = process.argv[7] || "1920x1080"
 var child = new (forever.Monitor)('app.js', {
     max: 30000,
     silent: false,
-    args: [streamUrl, wsurl, internalPort, fps, size]
+    args: [streamUrl, wsurl, internalPort, destPort, fps, size]
 });
 
 
