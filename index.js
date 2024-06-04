@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+    console.log('addr: ' + add);
+});
+  
 
 var forever = require('forever-monitor');
 

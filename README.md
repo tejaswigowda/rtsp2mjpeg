@@ -46,3 +46,27 @@ rtsp2mjpeg rtsp://192.168.0.247:8554/live \
 - npm
 - forever-monitor
 
+
+## Running in Background
+
+```bash
+nohup rtsp2mjpeg rtsp://........... &
+```
+
+To view nohup output:
+
+```bash
+tail -f nohup.out -f
+```
+
+To see nohup jobs:
+
+```bash
+jobs
+```
+
+To kill a nohup job:
+
+```bash
+kill %1
+```
