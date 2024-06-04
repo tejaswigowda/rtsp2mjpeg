@@ -14,10 +14,11 @@ var destPort = parseInt(process.argv[5] || "3000");
 var fps = parseInt(process.argv[6] || "30")
 var size = process.argv[7] || "1920x1080"
 
+var count = 0;
 var child = new (forever.Monitor)('app.js', {
     max: 30000,
     silent: true,
-    args: [streamUrl, wsurl, internalPort, destPort, fps, size]
+    args: [streamUrl, wsurl, internalPort, destPort, fps, size, count++]
 });
 
 child.start();

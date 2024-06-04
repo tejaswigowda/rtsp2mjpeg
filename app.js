@@ -6,8 +6,8 @@ var internalPort = parseInt(process.argv[4] || "9999");
 var destPort = parseInt(process.argv[5] || "3000");
 var fps = parseInt(process.argv[6] || "30");
 var size = process.argv[7] || "1920x1080";
+var count = parseInt(process.argv[8] || "0");
 
-console.log("wsurl: " + wsurl);
 var stream = require('node-rtsp-stream')
 const express = require('express')
 const app = express();
@@ -39,16 +39,10 @@ app.listen(destPort, () => {
     console.log('\x1b[31m%s\x1b[0m', 'Listening on port ' + destPort);
     // open in browser
     var opn = require('opn');
-    // open if ENTER is pressed
-    var stdin = process.stdin;
-    stdin.setRawMode(true);
-    stdin.resume();
-    stdin.setEncoding('utf8');
-    stdin.on('data', function(key){
-        if (key === '\u0003') {
-            opn('http://localhost:' + destPort);
-        }
-    });
+    if(count == 0){
+        opn('http://localhost:' + destPort);
+    }
+
 });
 
 var WebSocket = require('ws');
