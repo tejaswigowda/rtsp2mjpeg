@@ -2,7 +2,6 @@
 
 This is a simple RTSP to MJPEG proxy server. It can be used to convert an RTSP stream to MJPEG stream. The stream works with [jsmpeg](https://jsmpeg.com/).
 
-
 ![rtsp2mjpeg](images/dataflow.png)
 
 ## Installation
