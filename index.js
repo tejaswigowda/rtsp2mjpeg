@@ -31,7 +31,12 @@ child.on('restart', function() {
 
 child.on('start', function() {
     //console.log('Forever started for ' + streamUrl);
-    console.log('\x1b[31m%s\x1b[0m', 'Listening on port ' + destPort);
+    // green text
+    console.log('\x1b[32m%s\x1b[0m', 'Started streaming ' + streamUrl);
+    // blue text
+    console.log('\x1b[34m%s\x1b[0m', 'Internal WS port: ' + internalPort);
+
+    console.log('\x1b[31m%s\x1b[0m', 'Test HTTP Port ' + destPort);
     // get yes/no from user
     var readline = require('readline');
     var rl = readline.createInterface({
