@@ -22,3 +22,8 @@ var child = new (forever.Monitor)('app.js', {
 });
 
 child.start();
+
+child.on('restart', function() {
+    count++;
+    child.args = [streamUrl, wsurl, internalPort, destPort, fps, size, count];
+});

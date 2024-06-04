@@ -42,7 +42,6 @@ app.listen(destPort, () => {
     if(count == 0){
         opn('http://localhost:' + destPort);
     }
-
 });
 
 var WebSocket = require('ws');
