@@ -27,3 +27,8 @@ child.on('restart', function() {
     count++;
     child.args = [streamUrl, wsurl, internalPort, destPort, fps, size, count];
 });
+
+
+child.on('start', function() {
+    console.log('Forever started for ' + streamUrl);
+});

@@ -19,8 +19,10 @@ var stream = new stream({
     ffmpegOptions: { // options ffmpeg flags
         '-stats': '',
         '-r': fps,
-        '-s': size
+        '-s': size,
+        '-an': '',
     }
+
 })
 
 // serve /public folder
