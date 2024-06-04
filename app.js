@@ -39,7 +39,16 @@ app.listen(destPort, () => {
     console.log('\x1b[31m%s\x1b[0m', 'Listening on port ' + destPort);
     // open in browser
     var opn = require('opn');
-    opn('http://localhost:' + destPort);
+    // open if ENTER is pressed
+    var stdin = process.stdin;
+    stdin.setRawMode(true);
+    stdin.resume();
+    stdin.setEncoding('utf8');
+    stdin.on('data', function(key){
+        if (key === '\u0003') {
+            opn('http://localhost:' + destPort);
+        }
+    });
 });
 
 var WebSocket = require('ws');

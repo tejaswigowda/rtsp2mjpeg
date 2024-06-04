@@ -16,7 +16,7 @@ var size = process.argv[7] || "1920x1080"
 
 var child = new (forever.Monitor)('app.js', {
     max: 30000,
-    silent: false,
+    silent: true,
     args: [streamUrl, wsurl, internalPort, destPort, fps, size]
 });
 
