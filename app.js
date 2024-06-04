@@ -38,10 +38,21 @@ app.listen(destPort, () => {
     // red color in console
     console.log('\x1b[31m%s\x1b[0m', 'Listening on port ' + destPort);
     // open in browser
-    var opn = require('opn');
-    if(count == 0){
-        opn('http://localhost:' + destPort);
-    }
+
+    // get yes/no from user
+    var readline = require('readline');
+    var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    rl.question("Open test page in browser? (y/n) ", function(answer) {
+        if(answer == "y"){
+            var opn = require('opn');
+            opn('http://localhost:' + destPort);
+        }
+        rl.close();
+    });
 });
 
 var WebSocket = require('ws');
