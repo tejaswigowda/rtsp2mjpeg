@@ -70,3 +70,28 @@ To kill a nohup job:
 ```bash
 kill %1
 ```
+
+## Integration into any website via jsmpeg
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RTSP to MJPEG</title>
+</head>
+<body>
+    <canvas id="video-canvas"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/jsmpeg@2"></script>
+    <script>
+        var canvas = document.getElementById('video-canvas');
+        var player = new JSMpeg.Player('ws://localhost:[WebSocket Port]', {canvas: canvas});
+    </script>
+</body>
+</html>
+```
+
+## Known Issues
+
+- ```
+[sudo] npm install -g forever-monitor
+```
