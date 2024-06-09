@@ -19,7 +19,7 @@ var fps = parseInt(process.argv[6] || "30")
 var size = process.argv[7] || "1920x1080"
 
 var count = 0;
-var child = new (forever.Monitor)('./app.js', {
+var child = new (forever.Monitor)('app.js', {
     max: 30000,
     silent: true,
     args: [streamUrl, wsurl, internalPort, destPort, fps, size, count++]
@@ -41,6 +41,7 @@ child.on('start', function() {
     console.log('\x1b[34m%s\x1b[0m', 'JSMpeg WebSocket Port: ' + internalPort);
 
     console.log('\x1b[31m%s\x1b[0m', 'Test HTTP Port ' + destPort);
+
     // get yes/no from user
     var readline = require('readline');
     var rl = readline.createInterface({
@@ -48,7 +49,9 @@ child.on('start', function() {
         output: process.stdout
     });
 
-    rl.question("Open test page (http://localhost:" + destPort + "/)in browser? (y/n) ", function(answer) {
+    console.log("Do you want to open the stream in browser? (y/n)");
+
+    rl.question("", function(answer) {
         if(answer == "y" || answer == "Y" || answer == "yes" || answer == "Yes" || answer == "YES" || answer == ""){
             var opn = require('opn');
             opn('http://localhost:' + destPort);

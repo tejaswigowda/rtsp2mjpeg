@@ -22,7 +22,6 @@ var stream = new stream({
         '-s': size,
         '-an': '',
     }
-
 })
 
 // serve /public folder
