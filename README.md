@@ -92,6 +92,8 @@ kill %1
 
 ## Known Issues
 
-- ```
+- May need to install forever-monitor globally
+
+```
 [sudo] npm install -g forever-monitor
 ```
