@@ -61,8 +61,8 @@ child.on('start', function() {
         }
         rl.close();
     });
-    // restart the server every 6 hours
+    // restart the server every hour
     setInterval(function(){
         child.restart();
-    }, 6 * 60 * 60 * 1000);
+    }, 1 * 60 * 60 * 1000);
 });
