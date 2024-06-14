@@ -93,3 +93,15 @@ function isAlive(){
         process.exit();
     }
 }
+
+
+// restart stream if it stops
+stream.mpeg1Muxer.stream.on('exit', function() {
+    console.log('JSMpeg stream exited');
+    process.exit();
+});
+
+// restart stream every 24 hours
+setTimeout(function() {
+    process.exit();
+}, 1000*60*60*24);
