@@ -20,6 +20,7 @@ var stream = new stream({
         '-stats': '',
         '-r': fps,
         '-s': size,
+        '-an': '',
         '-nostats': '',
         '-loglevel': 'quiet',
         '-nobuffer': '',
