@@ -20,7 +20,10 @@ var stream = new stream({
         '-stats': '',
         '-r': fps,
         '-s': size,
-        '-an': '',
+        '-nostats': '',
+        '-loglevel': 'quiet',
+        '-nobuffer': '',
+        '-fflags': 'nobuffer'
     }
 })
 
@@ -76,7 +79,7 @@ if(wsurl != null && wsurl != "null"){
 
 function write(data) {
     // send binary data
-    if (ws && ws.readyState == 1){// && numberofclients > 0) {
+    if (ws && ws.readyState == 1){// && numberofclients > 0) {        
         ws.send(data);
     }
 }
