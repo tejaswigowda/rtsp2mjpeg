@@ -52,7 +52,7 @@ child.on('start', function() {
     console.log("Do you want to open the stream in browser? (y/n)");
 
     rl.question("", function(answer) {
-        if(answer == "y" || answer == "Y" || answer == "yes" || answer == "Yes" || answer == "YES" || answer == ""){
+        if(answer == "y" || answer == "Y" || answer == "yes" || answer == "Yes" || answer == "YES"){
             var opn = require('opn');
             opn('http://localhost:' + destPort);
         }
